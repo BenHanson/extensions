@@ -4,4 +4,4 @@ extensions <path> [-r] [-exclude <';' separated wildcards>]
 
 Example:
 
-extensions C:\Users\Ben -exclude !Desktop
+extensions C:\Users\Ben -exclude !*\Desktop\*
