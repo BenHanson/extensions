@@ -16,31 +16,39 @@ std::pair<std::vector<wildcardtl::wildcard>,
 
 bool exclude(const fs::path& path)
 {
-	const auto pathname = path.string();
-	bool skip = !g_exclude.second.empty();
-
-	for (const auto& wc : g_exclude.second)
+	try
 	{
-		if (!wc.match(pathname))
-		{
-			skip = false;
-			break;
-		}
-	}
+		const auto pathname = path.string();
+		bool skip = !g_exclude.second.empty();
 
-	if (!skip)
-	{
-		for (const auto& wc : g_exclude.first)
+		for (const auto& wc : g_exclude.second)
 		{
-			if (wc.match(pathname))
+			if (!wc.match(pathname))
 			{
-				skip = true;
+				skip = false;
 				break;
 			}
 		}
-	}
 
-	return skip;
+		if (!skip)
+		{
+			for (const auto& wc : g_exclude.first)
+			{
+				if (wc.match(pathname))
+				{
+					skip = true;
+					break;
+				}
+			}
+		}
+
+		return skip;
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return true;
+	}
 }
 
 void insert_ext(const fs::path& path, string_set& exts)
