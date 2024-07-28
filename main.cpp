@@ -131,9 +131,9 @@ void process_params(int argc, char* argv[])
 
 		if (*arg == '-')
 		{
-			if (strcmp(arg, "-r") == 0)
+			if (strcmp(arg, "-r") == 0 || strcmp(arg, "--recursive") == 0)
 				g_recursive = true;
-			else if (strcmp(arg, "-exclude") == 0)
+			else if (strcmp(arg, "-x") == 0 || strcmp(arg, "--exclude") == 0)
 			{
 				++i;
 
@@ -170,7 +170,8 @@ int main(int argc, char* argv[])
 	{
 		if (argc < 2)
 		{
-			std::cerr << "USAGE: extensions [-r] [-exclude <';' separated list of wildcards>] <path>\n";
+			std::cerr << "USAGE: extensions [--recursive|-r] "
+				"[(--exclude|-x) <';' separated list of wildcards>] <path>\n";
 			return 1;
 		}
 
