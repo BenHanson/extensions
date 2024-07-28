@@ -1,7 +1,7 @@
 Display the extensions contained in a path
 
-extensions <path> [-r] [-exclude <';' separated wildcards>]
+extensions <path> [--recursive|-r] [(--exclude|-x) <';' separated wildcards>]
 
 Example:
 
-extensions C:\Users\Ben -exclude !*\Desktop\\\*
+extensions C:\Users\Ben -x !*\Desktop\\\*
